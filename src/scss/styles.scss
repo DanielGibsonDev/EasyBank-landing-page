@@ -1,0 +1,558 @@
+@import './helpers/variables';
+@import './helpers/mixins';
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: {
+    family: 'Public Sans', sans-serif;
+    size: 1.5rem;
+    weight: 300;
+  }
+  line-height: 1.625;
+  background: $white;
+  color: $grayish-blue;
+  overflow-x: hidden;
+
+  @include screen-sm {
+    font-size: 1.6rem;
+  }
+}
+
+.link {
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.screen-reader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  border: 0;
+  padding: 0;
+}
+
+.container {
+  width: calc(100% - 50px);
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+.flex-row {
+  &__col {
+    text-align: center;
+  }
+}
+
+.logo {
+  &__img {
+    display: block;
+    fill: $white;
+    height: 20px;
+    width: 139px;
+    margin: 0 auto;
+
+    &--blue {
+      fill: $logo-blue;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.header {
+  padding: 2.5rem 0;
+  position: relative;
+  z-index: 1;
+  background: $white;
+
+  &__menu-button {
+    width: 2.5rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    
+    @include screen-sm {
+      display: none;
+    }
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .desktop-cta {
+    display: none;
+
+    @include screen-sm {
+      display: inherit;
+    }
+  }
+
+  .nav-menu {
+    display: none;
+
+    @include screen-sm {
+      display: inherit;
+    }
+
+    &__ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+    }
+
+    &__li:not(:last-child) {
+      margin-right: 3rem;
+    }
+
+    &__li {
+      position: relative;
+    }
+
+    &__link {
+      color: $grayish-blue;
+
+      &:hover {
+        color: $dark-blue;
+      }
+
+      &:hover:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: linear-gradient(82deg, rgba(49,211,92,1) 1%, rgba(43,183,218,1) 100%); 
+        height: 4px;
+        width: 100%;
+        bottom: -34px;
+      }
+    }
+  }
+}
+
+.popup-nav {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, rgba(#000, 0.7));
+  z-index: 2;
+
+  @include screen-sm {
+    display: none;
+  }
+
+  &_active {
+    display: block;
+  }
+
+  &__menu {
+    background: $white;
+    border-radius: 0.5rem;
+    margin: 10rem 2.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem;
+  }
+
+  &__link {
+    font-size: 1.8rem;
+    color: $dark-blue;
+
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.heading {
+  font-weight: 300;
+  color: $dark-blue;
+  line-height: 1.2;
+
+  &_h1 {
+    font-size: 3.8rem;
+
+    @include screen-sm {
+      font-size: 5.4rem;
+      line-height: 6.5rem;
+    }
+  }
+
+  &_h2 {
+    font-size: 3.2rem;
+
+    @include screen-sm {
+      font-size: 4rem;
+    }
+  }
+
+  &_h3 {
+    font-size: 2rem;
+  }
+
+  &_h4 {
+    font-size: 1.6rem;
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 4.4rem;
+  border-radius: 2.2rem;
+  background: linear-gradient(82deg, rgba(49,211,92,1) 1%, rgba(43,183,218,1) 100%); 
+  color: $white;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0 3.2rem;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.intro {
+  position: relative;
+  padding-bottom: 5.7rem;
+  background-color: $very-light-gray;
+  z-index: 0;
+
+  @include screen-sm {
+    padding: 14.5rem 0;
+  }
+
+  &__bg-img-mobile {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+
+    @include tablet {
+      display: none;
+    }
+  }
+  &__bg-img-desktop {
+    display: none;
+
+    @include tablet {
+      display: block;
+      position: absolute;
+      z-index: -1;
+      top: -26rem;
+      right: -39rem;
+      max-height: 720px;
+    }
+
+    @include screen-sm {
+      max-height: 800px;
+      top: -9.5rem;
+    }
+
+    @include screen-md {
+      max-height: 956px;
+      top: -24rem;
+    }
+  }  
+
+  &__img {
+    width: 100%;
+    max-width: 42rem;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -150px;
+    z-index: 1;
+    margin-bottom: -13rem;
+
+    @include screen-sm {
+      position: absolute;
+      right: 0;
+      max-width: 62rem;
+      right: -9.5rem;
+      top: -9rem;
+    }
+
+    @include screen-md {
+      width: 767px;
+      max-width: none;
+      right: -13rem;
+      top: -12.5rem;
+    }
+  }
+
+  &__text {
+    padding-bottom: 1.5rem;
+
+    @include tablet {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include screen-sm {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__container {
+    text-align: center;
+
+    @include screen-sm {
+      text-align: left;
+      max-width: 445px;
+    }
+  }
+}
+
+.features {
+  background-color: $light-grayish-blue;
+  padding-top: 5.7rem;
+  padding-bottom: 3rem;
+  text-align: center;
+
+  @include screen-sm {
+    text-align: left;
+    padding-bottom: 6rem;
+  }
+
+  &__text {
+    padding-bottom: 4rem;  
+    
+    @include screen-sm {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__why-choose {
+    @include screen-sm {
+      max-width: 65rem;
+    }
+  }
+
+  &__content {
+    @include screen-sm {
+      display: flex;
+    }
+  }
+}
+
+.feature-single {
+  &__text {
+    padding-bottom: 2rem;
+  }
+}
+
+.feature-single:not(:last-child) {
+  @include screen-sm {
+    padding-right: 4rem;
+  }
+}
+
+.articles {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: $very-light-gray;
+
+  .heading_h2 {
+    text-align: center;
+
+    @include screen-sm {
+      text-align: left;
+    }
+  }
+
+  &__content {
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
+  .article-single {
+    background-color: $white;
+    text-align: left;
+    margin-bottom: 2.4rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+
+    @include tablet {
+      text-align: left;
+      max-width: 260px;
+    }
+
+    &__container {
+      padding: 1.5rem 3rem 3rem;
+      
+      @include tablet {
+        padding-bottom: 1.5rem;
+      }
+    }
+
+    &__img {
+      width: 100%;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+
+      @include tablet {
+        height: 195px;
+        object-fit: cover;
+      }
+    }
+
+    &__link {
+      text-decoration: none;
+    }
+
+    .heading {
+      transition: 0.5;
+
+      &:hover {
+        color: #30BD80;
+      }
+    }
+
+    &__text--author {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1rem;
+    }
+
+    .heading {
+      margin-bottom: 1rem;
+    }
+
+    &__text {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+      letter-spacing: 0.035rem;
+    }
+  }
+}
+
+.footer {
+  background-color: $dark-blue;
+  text-align: center;
+  padding-bottom: 5rem;
+  padding-top: 4rem;
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__link {
+      color: #fff;
+      line-height: 3.8rem;
+
+      &:hover {
+        color: #30BD80;
+      }
+    }
+  }
+
+  &__nav:not(:last-child) {
+    @include screen-sm {
+      padding: 0 13rem;
+    }
+  }
+
+  &__cta {
+    padding: 3rem 0;
+
+    @include screen-sm {
+      text-align: right;
+    }
+  }
+
+  &__copyright {
+    padding-top: 3rem;
+  }
+
+  .logo {
+    &__img {
+      @include screen-sm {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__half-container {
+    @include screen-sm {
+      display: flex;
+    }
+  }
+
+  &__container {
+    @include screen-sm {
+      display: flex;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  &__logo {
+    @include screen-sm {
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+
+.socials {
+  display: flex;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  justify-content: center;
+
+  @include screen-sm {
+    padding-bottom: 0;
+  }
+
+  &__icon {
+    width: 3rem;
+    height: 3rem;
+    fill: #fff;
+    transition: 0.5s;
+
+    &:hover {
+      fill: #30BD80;
+    }
+  }
+
+  &__link {
+    line-height: 1;
+    display: block;
+    width: 30px;
+    height: 30px;
+    
+    &:not(:last-child) {
+      margin-right: 0.5rem
+    }
+  }
+}
+
+.attribution { 
+  font-size: 11px; text-align: center; 
+  a {
+    color: hsl(228, 45%, 44%);
+  }
+}
